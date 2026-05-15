@@ -1,3 +1,4 @@
+import 'package:expenses_tracker/screens/add_new_expense.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,12 +14,27 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.transparent,
         title: Text(
           'Expense Tracker',
-          style: TextStyle(color: Colors.white, fontSize: 26),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddNewExpense(),
+                ),
+              );
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -29,10 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.secondary,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
+                borderRadius: BorderRadius.circular(30),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    'data',
+                    'to be filled',
                     style: TextStyle(
                       fontSize: 26,
                       color: Theme.of(
@@ -57,6 +70,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            SizedBox(height: 40),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (contex, index) {
+                  return ListTile(
+                    leading: Icon(Icons.exposure_plus_1_outlined),
+                    title: Text(
+                      "Expanse",
+                      style: TextStyle(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface,
+                      ),
+                    ),
+                    trailing: Text("$index"),
+                  );
+                },
               ),
             ),
           ],
